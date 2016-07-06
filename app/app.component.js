@@ -1,4 +1,4 @@
-System.register(['@angular/core', './products/product-list.component', './products/product.service'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', 'rxjs/Rx', '@angular/router', './home/welcome.component', './products/product-list.component', './products/product.service', './products/product-detail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,18 +10,31 @@ System.register(['@angular/core', './products/product-list.component', './produc
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, product_list_component_1, product_service_1;
+    var core_1, http_1, router_1, welcome_component_1, product_list_component_1, product_service_1, product_detail_component_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (_1) {},
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (welcome_component_1_1) {
+                welcome_component_1 = welcome_component_1_1;
+            },
             function (product_list_component_1_1) {
                 product_list_component_1 = product_list_component_1_1;
             },
             function (product_service_1_1) {
                 product_service_1 = product_service_1_1;
+            },
+            function (product_detail_component_1_1) {
+                product_detail_component_1 = product_detail_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -31,10 +44,16 @@ System.register(['@angular/core', './products/product-list.component', './produc
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'pm-app',
-                        template: "\n    <div class=\"container-fluid\">\n        <h1>{{pageTitle}}</h1>\n        <pm-products></pm-products>\n    </div>\n    ",
-                        directives: [product_list_component_1.ProductListComponent],
-                        providers: [product_service_1.ProductService]
-                    }), 
+                        template: "\n    <div>\n        <nav class=\"navbar navbar-default\">\n            <div class=\"container-fluid\">\n                <a class=\"navbar-brand\" [routerLink]=\"['/welcome']\">{{pageTitle}}</a>\n                <ul class=\"nav navbar-nav pull-right\">\n                    <li>\n                        <a [routerLink]=\"['/welcome']\">Home</a>\n                    </li>\n                    <li>\n                        <a [routerLink]=\"['/products']\">Product List</a>\n                    </li>\n                </ul>\n            </div>\n        </nav>\n    </div>\n    <div class=\"container\">\n        <router-outlet></router-outlet>\n    </div>\n    ",
+                        directives: [router_1.ROUTER_DIRECTIVES],
+                        providers: [product_service_1.ProductService, http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS]
+                    }),
+                    router_1.Routes([
+                        { path: '/', component: welcome_component_1.WelcomeComponent },
+                        { path: '/welcome', component: welcome_component_1.WelcomeComponent },
+                        { path: '/products', component: product_list_component_1.ProductListComponent },
+                        { path: '/product/:id', component: product_detail_component_1.ProductDetailComponent }
+                    ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;

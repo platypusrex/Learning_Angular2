@@ -1,0 +1,26 @@
+<div class="panel panel-default" *ngIf="product">
+    <div class="panel-heading">
+        <h4>{{pageTitle + ': ' + product.productName}}</h4>
+        <span>{{product | json}}</span>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="img-responsive" [src]="product.imageUrl" [alt]="product.productName" [style.width.px]="200" [style.margin.px]="2"/>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="lead" [style.margin-bottom.px]="10" style="display:inline-block;">{{product.productName + ' ' + product.productCode}}</p>
+                        <div class="pull-right" style="display:inline-block;">
+                            <span>rating:&nbsp;</span>
+                            <div style="display:inline-block;">
+                                <ai-star [rating]="product.rating"></ai-star>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

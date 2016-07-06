@@ -32,8 +32,11 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Rx'], function(exports_
                 ProductService.prototype.getProducts = function () {
                     return this._http.get(this._productUrl)
                         .map(function (res) { return res.json(); })
-                        .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
                         .catch(this.handleError);
+                };
+                ProductService.prototype.getProduct = function (id) {
+                    return this.getProducts()
+                        .map(function (products) { return products.find(function (p) { return p.productId === id; }); });
                 };
                 ProductService.prototype.handleError = function (error) {
                     console.log(error);
